@@ -1,0 +1,40 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+    // wall
+    {
+        name    mallaGDL;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (-0.00025 -0.00005 -0.00002) (0.00475 0.0001 0.00495);
+        }
+    }
+// Select based on faceSet
+    {
+        name    porosoZona;
+        type      cellZoneSet;
+        action    new;
+       source   setToCellZone;
+       sourceInfo
+       {
+           set mallaGDL;             // Name of faceSet
+
+            //option neighbour; // cell with neighbour in faceSet
+            //option owner;     //  ,,       owner
+            //option any;         // cell with any face in faceSet
+            //option all;       // cell with all faces in faceSet
+        }
+    }
+);
